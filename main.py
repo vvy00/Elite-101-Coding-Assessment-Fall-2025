@@ -132,10 +132,29 @@ class Book:
             return datetime.strptime(self.due_date, "%Y-%m-%d") < datetime.now()
         return False
     
+def add_new_book(books):
+    print("\nAdd a New Book to the Library:")
+    
+    new_id = input("Enter book ID (e.g., B10): ")
+    new_title = input("Enter book title: ")
+    new_author = input("Enter book author: ")
+    new_genre = input("Enter book genre: ")
+
+    new_book = Book(
+        id=new_id,
+        title=new_title,
+        author=new_author,
+        genre=new_genre,
+        available=True,
+        due_date=None,
+        checkouts=0
+    )
+    
+    books.append(new_book)
+    print(f"Book '{new_title}' has been added to the library!")
 # convert dictionary to objects    
 book_objects = [Book(**b) for b in library_books]
 
-# 
 # level 1: View available books
 def view_available_books(books):
     print("\nAvailable Books:")
@@ -181,6 +200,7 @@ def menu(books):
         print("4. Return a Book")              # calls level 4 (Book.return_book())
         print("5. View Overdue Books")         # calls level 4
         print("6. Top 3 Most Check-Out Books") # calls level 5
+        print("7. Add a New Book")
         print("0. Exit")
 
         choice = input("Enter you choices: ")
@@ -209,6 +229,8 @@ def menu(books):
             list_overdue_books(books)
         elif choice == "6":
             top_checked_out_books(books)
+        elif choice == "7":
+            add_new_book(books)
         elif choice == "0":
             print("Goodbye")
             break
