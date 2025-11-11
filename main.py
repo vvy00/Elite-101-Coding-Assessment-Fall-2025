@@ -165,7 +165,7 @@ def view_available_books(books):
 # level 2: Search books
 def search_books(books):
     term = input("Enter author or genre to search: ").lower()
-    results = [b for b in books if term in b.author.lower() or term in b.genre.lower()]
+    results = [b for b in books if term in b.author.lower() or term in b.genre.lower() or term in b.title.lower()]
     if results:
         print("\nSearch Results:")
         for book in results:
@@ -203,14 +203,14 @@ def menu(books):
         print("7. Add a New Book")
         print("0. Exit")
 
-        choice = input("Enter you choices: ")
+        choice = input("Enter you choice: ")
 
         if choice == "1":
             view_available_books(books)
         elif choice == "2":
             search_books(books)
         elif choice == "3":
-            book_id = input("Enter book ID to checkout: ")
+            book_id = input("Enter book ID to checkout: ").upper()
             for book in books:
                 if book.id == book_id:
                     book.checkout()
@@ -218,7 +218,7 @@ def menu(books):
             else:
                 print("Book ID not found.")
         elif choice == "4":
-            book_id = input("Enter book ID to return: ")
+            book_id = input("Enter book ID to return: ").upper()
             for book in books:
                 if book.id == book_id:
                     book.return_book()
